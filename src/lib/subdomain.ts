@@ -19,7 +19,6 @@ export const SPECIAL_SUBDOMAINS: Record<string, SpecialEntry> = {
 
 // Subdomains we never want to render a roast for (reserved / infra).
 const RESERVED = new Set([
-  "www",
   "api",
   "admin",
   "mail",
@@ -28,6 +27,9 @@ const RESERVED = new Set([
   "assets",
   "cdn",
 ]);
+
+// Subdomains that should behave like the apex root (no roast, landing page).
+const ROOT_ALIASES = new Set(["www"]);
 
 export type SubdomainInfo =
   | { kind: "root" }
@@ -67,6 +69,7 @@ function classify(raw: string): SubdomainInfo {
   // still resolve to "a".
   const name = raw.split(".")[0];
   if (!name) return { kind: "root" };
+  if (ROOT_ALIASES.has(name)) return { kind: "root" };
   if (RESERVED.has(name)) return { kind: "reserved", name };
   const special = SPECIAL_SUBDOMAINS[name];
   if (special) return { kind: "special", name, entry: special };

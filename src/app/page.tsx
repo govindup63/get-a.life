@@ -1,5 +1,7 @@
 import { headers } from "next/headers";
+import { after } from "next/server";
 import { copyFor, parseSubdomain, ROOT_DOMAIN } from "@/lib/subdomain";
+import { logVisit } from "@/lib/logVisit";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +11,9 @@ export default async function Page() {
   const info = parseSubdomain(host);
   const { headline, subline, flavor, name } = copyFor(info);
   const isRoot = info.kind === "root";
+
+  // Fire-and-forget after the response is sent. Page render does not wait on Mongo.
+  after(() => logVisit({ headers: h, info, copy: { headline, subline, flavor } }));
 
   return (
     <main className="page">
