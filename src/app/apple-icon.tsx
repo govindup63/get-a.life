@@ -6,6 +6,8 @@ export const contentType = "image/png";
 const BG = "#f4f1ea";
 const ACCENT = "#b32626";
 
+// iOS forces opaque + auto-rounds the corners, so keep the cream tile and
+// scale the dot up to fill ~90% of the frame.
 export default function AppleIcon() {
   return new ImageResponse(
     (
@@ -21,9 +23,9 @@ export default function AppleIcon() {
       >
         <div
           style={{
-            width: 120,
-            height: 120,
-            borderRadius: 120,
+            width: 160,
+            height: 160,
+            borderRadius: 160,
             background: ACCENT,
             display: "flex",
           }}
