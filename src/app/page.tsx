@@ -1,9 +1,43 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { after } from "next/server";
 import { copyFor, parseSubdomain, ROOT_DOMAIN } from "@/lib/subdomain";
 import { logVisit } from "@/lib/logVisit";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const h = await headers();
+  const host = h.get("host") ?? ROOT_DOMAIN;
+  const proto =
+    h.get("x-forwarded-proto") ??
+    (host.includes("localhost") ? "http" : "https");
+  const info = parseSubdomain(host);
+  const { headline, subline } = copyFor(info);
+
+  const isRoot = info.kind === "root";
+  const title = isRoot ? "get-some.life" : headline;
+  const description = subline;
+  const url = `${proto}://${host}`;
+
+  return {
+    metadataBase: new URL(url),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "get-some.life",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default async function Page() {
   const h = await headers();
