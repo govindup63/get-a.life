@@ -121,7 +121,6 @@ export default async function Image() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
               fontFamily: "JetBrains Mono",
               fontSize: 20,
@@ -129,7 +128,6 @@ export default async function Image() {
             }}
           >
             <span>{ROOT_DOMAIN}</span>
-            <span>a small website that reads your subdomain.</span>
           </div>
         </div>
       </div>
