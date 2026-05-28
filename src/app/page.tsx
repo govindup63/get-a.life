@@ -115,6 +115,17 @@ export default async function Page() {
             <a href={`https://${ROOT_DOMAIN}`}>{ROOT_DOMAIN}</a>. no cookies,
             no tracking, no point.
           </p>
+          <p className="footer-credit">
+            — perpetrated by{" "}
+            <a
+              href="https://github.com/govindup63"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              govindup63
+            </a>
+            , who should also get some life.
+          </p>
         </footer>
       </div>
     </main>
