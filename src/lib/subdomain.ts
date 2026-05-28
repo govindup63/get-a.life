@@ -9,11 +9,12 @@ export type SpecialEntry = {
 // Hand-picked subdomains get a custom roast instead of the generic one.
 export const SPECIAL_SUBDOMAINS: Record<string, SpecialEntry> = {
   govind: {
-    headline: "govind already has a life. you have a fleshlight and a fitbit.",
+    headline:
+      "govind built this so you'd type his name and feel something. it's working.",
     subline:
-      "he's out raw-dogging reality while you're refreshing his subdomain at 3am like it owes you child support.",
+      "you typed his name. you waited for the site to load. you read this sentence.",
     flavor:
-      "the fact that you typed his name to feel something is the most pathetic thing on the public internet today.",
+      "every additional word you read just makes this funnier for him.",
   },
 };
 
